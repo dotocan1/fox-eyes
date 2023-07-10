@@ -2,6 +2,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 }
 
 .button {
@@ -26,4 +27,26 @@
   
   .button:active {
     background-color: #3e8e41;
+  }
+
+  #timer {
+    font-family: Arial, sans-serif;
+    font-size: 24px;
+    line-height: 1.5;
+    color: #333;
+    text-align: justify;
+  }
+  
+  #timer::selection {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  #timer a {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  #timer a:hover {
+    text-decoration: underline;
   }
