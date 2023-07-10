@@ -15,24 +15,27 @@ function displayNotification () {
 
 // Timer function 
 
-function startTimer (duration, display) {
-    var timer = duration, minutes, seconds;
-
-    var countdownInterval = setInterval(function () {
-        minutes = parseInt(timer / 60, 10);
-        seconds = parseInt(timer % 60, 10);
-
-        minutes = minutes < 10 ? "0" + minutes : minutes;
-        seconds = seconds < 10 ? "0" + seconds : seconds;
-
-        display.textContent = minutes + ":" + seconds;
-
-        if (--timer < 0) {
-            clearInterval(countdownInterval);
-            display.textContent = "Timer finished!";
-        }
-    }, 1000);
-}
+function startTimer(duration, display) {
+    var worker = new Worker("./timer-worker.js");
+  
+    worker.onmessage = function (event) {
+      var timer = event.data;
+      var minutes = parseInt(timer / 60, 10);
+      var seconds = parseInt(timer % 60, 10);
+  
+      minutes = minutes < 10 ? "0" + minutes : minutes;
+      seconds = seconds < 10 ? "0" + seconds : seconds;
+  
+      display.textContent = minutes + ":" + seconds;
+  
+      if (timer <= 0) {
+        worker.terminate();
+        display.textContent = "Timer finished!";
+      }
+    };
+  
+    worker.postMessage(duration);
+  }
 
 
 
