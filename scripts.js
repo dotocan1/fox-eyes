@@ -58,7 +58,8 @@ button.addEventListener('click', () => {
                 // displayNotification();
 
                 // Schedule subsequent notifications every 20 minutes
-                setInterval(displayNotification, 20 * 60 * 1000);
+                // setTimeout(displayNotification, 20 * 60 * 1000);
+                setTimeout(displayNotification, 10 * 1000);
                 startTimer(twentyMinutes, display);
             }
         });
