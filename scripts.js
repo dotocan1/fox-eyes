@@ -12,6 +12,7 @@ function displayNotification () {
         // var audio = new Audio("path_to_sound_file.mp3");
         // audio.play();
         timerRunning = false;
+        alert("Rest your eyes!");
     }
 }
 
