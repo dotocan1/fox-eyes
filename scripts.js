@@ -33,8 +33,8 @@ function startTimer (duration, display) {
 
         if (timer <= 0) {
             worker.terminate();
-            display.textContent = "Rest your eyes then start the timer again!";
             displayNotification();
+            display.textContent = "Rest your eyes then start the timer again!";
         }
     };
 
