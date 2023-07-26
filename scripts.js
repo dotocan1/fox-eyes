@@ -34,6 +34,7 @@ function startTimer (duration, display) {
         if (timer <= 0) {
             worker.terminate();
             display.textContent = "Rest your eyes then start the timer again!";
+            displayNotification();
         }
     };
 
@@ -46,10 +47,10 @@ function startTimer (duration, display) {
 var display = document.getElementById("timer");
 let timerRunning = false;
 
+// Declare timer interval
+twentyMinutes = 20 * 60;
 //
 let button = document.querySelector(".button");
-// Set the timer duration to 20 minutes (in seconds)
-var twentyMinutes = 20 * 60;
 button.addEventListener('click', () => {
     // if the timer is already runnign
     if(timerRunning){
@@ -67,8 +68,6 @@ button.addEventListener('click', () => {
 
                 timerRunning = true;
                 // Schedule subsequent notifications every 20 minutes
-                // setTimeout(displayNotification, 20 * 60 * 1000);
-                setTimeout(displayNotification, 20 * 60 * 1000);
                 startTimer(twentyMinutes, display);
             }
         });
