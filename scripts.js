@@ -36,9 +36,9 @@ function getRandomInt(min, max) {
 function startTimer (duration, display) {
     var worker = new Worker("./timer-worker.js");
 
-    let blink1 = getRandomInt(0, 1200);
-    let blink2 = getRandomInt(0, 1200);
-    let blink3 = getRandomInt(0, 1200);
+    let blink1 = getRandomInt(900, 1199);
+    let blink2 = getRandomInt(600, 899);
+    let blink3 = getRandomInt(200, 599);
 
     worker.onmessage = function (event) {
         var timer = event.data;
