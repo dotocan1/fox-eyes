@@ -2,7 +2,7 @@
 
 function displayNotification () {
     if (Notification.permission === "granted") {
-        var notification = new Notification("Hello!", {
+        var notification1 = new Notification("Break time!", {
             body: "Rest your eyes!",
             icon: "./fox-eyes.png"
         });
@@ -16,13 +16,42 @@ function displayNotification () {
     }
 }
 
+function displayBlinkNotification () {
+    if (Notification.permission === "granted") {
+        var notification2 = new Notification("Start blinking!", {
+            body: "Blink!",
+            icon: "./fox-eyes.png"
+        });
+    }
+}
+
+function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
 // Timer function 
 
 function startTimer (duration, display) {
     var worker = new Worker("./timer-worker.js");
 
+    let blink1 = getRandomInt(0, 1200);
+    let blink2 = getRandomInt(0, 1200);
+    let blink3 = getRandomInt(0, 1200);
+
     worker.onmessage = function (event) {
         var timer = event.data;
+        console.log(timer)
+        if(timer == blink1){
+            displayBlinkNotification();
+            console.log("this works")
+        }else if(timer == blink2){
+            displayBlinkNotification();
+        }else if(timer == blink3){
+            displayBlinkNotification();
+        }
+
         var minutes = parseInt(timer / 60, 10);
         var seconds = parseInt(timer % 60, 10);
 
@@ -59,7 +88,7 @@ button.addEventListener('click', () => {
     }
     // Check if the browser supports notifications
     else if ("Notification" in window) {
-        console.log('hey1')
+        // console.log('hey1')
         // Request permission to display notifications
         Notification.requestPermission().then(function (permission) {
             if (permission === "granted") {
