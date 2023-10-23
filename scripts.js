@@ -39,8 +39,8 @@ function startTimer (duration, display) {
     worker.onmessage = function (event) {
         var timer = event.data;
         console.log(timer)
-        if(timer%60 == 0){
-            console.log("Minute has passed!");
+        if(timer%30 == 0){
+            console.log("Half a minute has passed!");
             displayBlinkNotification();
         }
 
