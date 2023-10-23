@@ -25,7 +25,7 @@ function displayBlinkNotification () {
     }
 }
 
-function getRandomInt(min, max) {
+function getRandomInt (min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min + 1) + min);
@@ -36,19 +36,11 @@ function getRandomInt(min, max) {
 function startTimer (duration, display) {
     var worker = new Worker("./timer-worker.js");
 
-    let blink1 = getRandomInt(900, 1199);
-    let blink2 = getRandomInt(600, 899);
-    let blink3 = getRandomInt(200, 599);
-
     worker.onmessage = function (event) {
         var timer = event.data;
         console.log(timer)
-        if(timer == blink1){
-            displayBlinkNotification();
-            console.log("this works")
-        }else if(timer == blink2){
-            displayBlinkNotification();
-        }else if(timer == blink3){
+        if(timer%60 == 0){
+            console.log("Minute has passed!");
             displayBlinkNotification();
         }
 
@@ -82,7 +74,7 @@ twentyMinutes = 20 * 60;
 let button = document.querySelector(".button");
 button.addEventListener('click', () => {
     // if the timer is already runnign
-    if(timerRunning){
+    if (timerRunning) {
         alert("Timer is already running!")
         console.log('hey')
     }
