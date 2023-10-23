@@ -4,7 +4,7 @@ function displayNotification () {
     if (Notification.permission === "granted") {
         var notification1 = new Notification("Break time!", {
             body: "Rest your eyes!",
-            icon: "./fox-eyes.png"
+            icon: "./exclamation-mark.png"
         });
 
         // TODO: add sound
