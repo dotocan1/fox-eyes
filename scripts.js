@@ -41,7 +41,7 @@ function startTimer (duration, display) {
         console.log(timer)
         if(timer%30 == 0){
             console.log("Half a minute has passed!");
-            displayBlinkNotification();
+            // displayBlinkNotification();
         }
 
         var minutes = parseInt(timer / 60, 10);
