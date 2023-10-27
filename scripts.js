@@ -58,10 +58,13 @@ function startTimer (duration, display) {
 
         if (timer <= 0) {
             await displayNotification();
-            alert("Rest your eyes!");
+            setTimeout(function () {
+                alert("Rest your eyes!");
+            }, 5000); // Delay the alert by 1 second (adjust as needed)
             worker.terminate();
             display.textContent = "Rest your eyes then start the timer again!";
         }
+
     };
 
     worker.postMessage(duration);
