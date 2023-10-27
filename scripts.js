@@ -1,19 +1,23 @@
 // Displaying the notification
 
 function displayNotification () {
-    if (Notification.permission === "granted") {
-        var notification1 = new Notification("Break time!", {
-            body: "Rest your eyes!",
-            icon: "./exclamation-mark.png"
-        });
+    return new Promise((resolve, reject) => {
+        {
+            if (Notification.permission === "granted") {
+                var notification1 = new Notification("Break time!", {
+                    body: "Rest your eyes!",
+                    icon: "./exclamation-mark.png"
+                });
 
-        // TODO: add sound
-        // Play sound
-        var audio = new Audio("./ring-sound.mp3");
-        audio.play();
-        timerRunning = false;
-        alert("Rest your eyes!");
-    }
+                // TODO: add sound
+                // Play sound
+                var audio = new Audio("./ring-sound.mp3");
+                audio.play();
+                timerRunning = false;
+                resolve();
+            }
+        }
+    })
 }
 
 function displayBlinkNotification () {
@@ -36,12 +40,12 @@ function getRandomInt (min, max) {
 function startTimer (duration, display) {
     var worker = new Worker("./timer-worker.js");
 
-    worker.onmessage = function (event) {
+    worker.onmessage = async function (event) {
         var timer = event.data;
         console.log(timer)
-        if(timer%30 == 0){
+        if (timer % 30 == 0) {
             console.log("Half a minute has passed!");
-            // displayBlinkNotification();
+            displayBlinkNotification();
         }
 
         var minutes = parseInt(timer / 60, 10);
@@ -53,8 +57,9 @@ function startTimer (duration, display) {
         display.textContent = minutes + ":" + seconds;
 
         if (timer <= 0) {
+            await displayNotification();
+            alert("Rest your eyes!");
             worker.terminate();
-            displayNotification();
             display.textContent = "Rest your eyes then start the timer again!";
         }
     };
