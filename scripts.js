@@ -62,9 +62,10 @@ function startTimer (duration, display) {
                 alert("Rest your eyes!");
             }, 5000); // Delay the alert by 1 second (adjust as needed)
             worker.terminate();
+            document.title = `Fox Eyes`;
             display.textContent = "Rest your eyes then start the timer again!";
         }
-
+        document.title = `${minutes}:${seconds} until rest`;
     };
 
     worker.postMessage(duration);
